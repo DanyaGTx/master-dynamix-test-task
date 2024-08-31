@@ -9,4 +9,5 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+  modules: ["@hypernym/nuxt-gsap"],
 });

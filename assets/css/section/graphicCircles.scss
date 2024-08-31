@@ -1,0 +1,151 @@
+.main-circle {
+  position: relative;
+  background: url("../../assets/svg/shadow.svg") no-repeat center;
+  background-size: 100%;
+
+  @media (max-width: 1150px) {
+    transform: translateX(-30px);
+  }
+}
+
+.first-circle {
+  position: relative;
+  width: 50vw;
+  height: 50vw;
+  max-width: 700px;
+  max-height: 700px;
+  border: 1px solid #0f0f1033;
+  border-radius: 50%;
+}
+
+.second-circle {
+  position: absolute;
+  width: 70%;
+  height: 70%;
+  max-width: 500px;
+  max-height: 500px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid #0f0f1033;
+  border-radius: 50%;
+}
+
+.third-circle {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  max-width: 300px;
+  max-height: 300px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid #0f0f1033;
+  border-radius: 50%;
+}
+
+.chipD__image {
+  object-fit: cover;
+  width: 75px;
+  height: 75px;
+
+  @media (max-width: 780px) {
+    width: calc(75px * 0.7);
+    height: calc(75px * 0.7);
+  }
+
+  @media (max-width: 520px) {
+    width: calc(75px * 0.5);
+    height: calc(75px * 0.5);
+  }
+
+  @media (max-width: 420px) {
+    width: calc(75px * 0.4);
+    height: calc(75px * 0.4);
+  }
+}
+
+.chipF__image {
+  object-fit: cover;
+  width: 80px;
+  height: 80px;
+
+  @media (max-width: 780px) {
+    width: calc(80px * 0.7);
+    height: calc(80px * 0.7);
+  }
+
+  @media (max-width: 520px) {
+    width: calc(80px * 0.5);
+    height: calc(80px * 0.5);
+  }
+
+  @media (max-width: 420px) {
+    width: calc(80px * 0.4);
+    height: calc(80px * 0.4);
+  }
+}
+
+.chipN__image {
+  object-fit: cover;
+  width: 110px;
+  height: 110px;
+
+  @media (max-width: 780px) {
+    width: calc(110px * 0.7);
+    height: calc(110px * 0.7);
+  }
+
+  @media (max-width: 520px) {
+    width: calc(110px * 0.5);
+    height: calc(110px * 0.5);
+  }
+
+  @media (max-width: 420px) {
+    width: calc(110px * 0.4);
+    height: calc(110px * 0.4);
+  }
+}
+
+.chipI__image {
+  object-fit: cover;
+  width: 105px;
+  height: 105px;
+
+  @media (max-width: 780px) {
+    width: calc(105px * 0.7);
+    height: calc(105px * 0.7);
+  }
+
+  @media (max-width: 520px) {
+    width: calc(105px * 0.5);
+    height: calc(105px * 0.5);
+  }
+
+  @media (max-width: 420px) {
+    width: calc(105px * 0.4);
+    height: calc(105px * 0.4);
+  }
+}
+
+.common-chip {
+  position: absolute;
+  transform-origin: center;
+  z-index: 2;
+}
+
+.gold-card {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 370px;
+
+  @media (max-width: 1150px) {
+    width: auto;
+  }
+}
+
+.gold-card img {
+  width: 100%;
+}

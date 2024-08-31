@@ -1,26 +1,35 @@
 <template>
-  <div class="max-w-[430px] text-base">
-    <h1 class="text-[64px] leading-[64px] font-semibold uppercase">
-      Test Form
-    </h1>
-    <p class="mt-6">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua.
-    </p>
-    <div class="max-w-[330px] mt-8 flex flex-col gap-8 items-start">
-      <div class="flex flex-col gap-4 w-full">
-        <BaseInput
-          v-model="formModel.email"
-          :validation="v$.$errors"
-          placeholder="Email"
-        />
-        <BaseInput
-          v-model="formModel.name"
-          :validation="v$.$errors"
-          placeholder="Name"
-        />
+  <div class="text-base max-[1280px]:min-w-fit">
+    <div class="max-w-[430px]">
+      <h1
+        class="text-[64px] leading-[64px] font-semibold uppercase max-[440px]:text-5xl"
+      >
+        Test Form
+      </h1>
+      <p class="mt-6">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+
+      <SectionGraphicCircles
+        v-if="isClient && width <= 980"
+        class="hidden justify-center mt-6 max-[980px]:flex"
+      />
+      <div class="max-w-[330px] mt-8 flex flex-col gap-8 items-start">
+        <div class="flex flex-col gap-4 w-full">
+          <BaseInput
+            v-model="formModel.email"
+            :validation="v$.$errors"
+            placeholder="Email"
+          />
+          <BaseInput
+            v-model="formModel.name"
+            :validation="v$.$errors"
+            placeholder="Name"
+          />
+        </div>
+        <BaseButton @click="submitForm">Apply</BaseButton>
       </div>
-      <BaseButton @click="submitForm">Apply</BaseButton>
     </div>
   </div>
 </template>
@@ -28,6 +37,11 @@
 <script setup>
 import { required, email, helpers, minLength } from "@vuelidate/validators";
 import { useVuelidate } from "@vuelidate/core";
+import { useWindowSize } from "@vueuse/core";
+
+const { width } = useWindowSize();
+
+const isClient = ref(false);
 
 const emit = defineEmits(["submit-form"]);
 
@@ -57,6 +71,10 @@ const submitForm = async () => {
     emit("submit-form");
   }
 };
+
+onMounted(() => {
+  isClient.value = true;
+});
 </script>
 
 <style scoped>
