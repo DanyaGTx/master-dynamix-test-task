@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-around w-full items-center max-[420px]:mt-[-6rem]">
+  <div class="sections-wrapper">
     <SectionForm @submitForm="submitForm" v-model="formData" />
     <SectionGraphicCircles
       v-show="isClient && width >= 980"
@@ -12,7 +12,9 @@
 import { useWindowSize } from "@vueuse/core";
 
 const { width } = useWindowSize();
+
 const isClient = ref(false);
+
 const formData = ref({
   email: "",
   name: "",
@@ -27,4 +29,8 @@ onMounted(() => {
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+.sections-wrapper {
+  @apply flex gap-20 w-full items-center max-[1280px]:gap-0 max-[1280px]:justify-around max-[420px]:mt-[-6rem];
+}
+</style>
