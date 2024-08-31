@@ -8,8 +8,8 @@ const formData = ref({
   name: "",
 });
 
-const submitForm = () => {
-  console.log("submit");
+const submitForm = async () => {
+  console.log("submit", formData.value);
 };
 </script>
 
