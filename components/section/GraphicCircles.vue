@@ -54,6 +54,8 @@ import {
   useAnimateCirclesSequentially,
 } from "~/composables/graphicCircles/index";
 
+const { $gsap } = useNuxtApp();
+
 const firstCircle = ref(null);
 const secondCircle = ref(null);
 const thirdCircle = ref(null);
@@ -78,9 +80,11 @@ const updateAllChipsPosition = () => {
 };
 
 const updateChipPosition = (chip) => {
-  chip.style.transform = `translate(-50%, -50%)`;
-  chip.style.left = "50%";
-  chip.style.top = "50%";
+  if (chip) {
+    chip.style.transform = `translate(-50%, -50%)`;
+    chip.style.left = "50%";
+    chip.style.top = "50%";
+  }
 };
 
 const animateChipsRotation = () => {
@@ -91,10 +95,16 @@ const animateChipsRotation = () => {
 };
 
 const startAllAnimations = () => {
+  const timeline = $gsap.timeline();
+  timeline
+    .add(() => useAnimateCirclesSequentially())
+    .add(
+      () => useAnimateZoomAndRotate(".gold-card", { shakingOnHover: true }),
+      "+=0.5"
+    );
+
   useAnimateChipsAppearing();
   animateChipsRotation();
-  useAnimateZoomAndRotate(".gold-card", { shakingOnHover: true });
-  useAnimateCirclesSequentially();
   updateAllChipsPosition();
 };
 

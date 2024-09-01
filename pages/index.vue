@@ -2,6 +2,7 @@
   <div class="sections-wrapper">
     <SectionForm @submitForm="submitForm" v-model="formData" />
     <SectionGraphicCircles
+      :key="rerenderKey"
       v-show="isClient && width >= 980"
       class="max-[980px]:hidden"
     />
@@ -9,10 +10,12 @@
 </template>
 
 <script setup lang="ts">
-import { useWindowSize } from "@vueuse/core";
+import { useWindowSize, useDebounceFn } from "@vueuse/core";
+import { useToast, TYPE, POSITION } from "vue-toastification";
 
 const { width } = useWindowSize();
 
+const toast = useToast();
 const isClient = ref(false);
 
 const formData = ref({
@@ -20,17 +23,46 @@ const formData = ref({
   name: "",
 });
 
-const submitForm = async () => {
-  console.log("submit", formData.value);
+const showSuccessFormToast = () => {
+  const options = {
+    type: TYPE.SUCCESS,
+    position: POSITION.TOP_CENTER,
+    timeout: 3000,
+  };
+  toast(`Hello ${formData.value.name}!`, options);
 };
+
+const resetFormData = () => {
+  formData.value = {
+    email: "",
+    name: "",
+  };
+};
+
+const submitForm = async () => {
+  showSuccessFormToast();
+  resetFormData();
+};
+
+const rerenderKey = ref(0);
+const rerenderAnimationComponent = useDebounceFn(() => {
+  rerenderKey.value++;
+}, 500);
 
 onMounted(() => {
   isClient.value = true;
+
+  // restart animation to prevent breaking it on screen rescaling
+  window.addEventListener("resize", rerenderAnimationComponent);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("resize", rerenderAnimationComponent);
 });
 </script>
 
 <style scoped>
 .sections-wrapper {
-  @apply flex gap-20 w-full items-center max-[1280px]:gap-0 max-[1280px]:justify-around max-[420px]:mt-[-6rem];
+  @apply flex gap-20 w-full items-center max-[1280px]:gap-0 max-[980px]:justify-around max-[420px]:mt-[-6rem];
 }
 </style>

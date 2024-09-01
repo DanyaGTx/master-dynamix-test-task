@@ -146,6 +146,10 @@
   width: 370px;
 
   @media (max-width: 1150px) {
+    width: 300px;
+  }
+
+  @media (max-width: 980px) {
     width: auto;
   }
 }

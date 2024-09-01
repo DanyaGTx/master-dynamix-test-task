@@ -12,9 +12,11 @@
       </p>
 
       <SectionGraphicCircles
+        :key="rerenderKey"
         v-if="isClient && width <= 980"
         class="hidden justify-center mt-6 max-[980px]:flex"
       />
+
       <div class="max-w-[330px] mt-8 flex flex-col gap-8 items-start">
         <div class="flex flex-col gap-4 w-full">
           <BaseInput
@@ -37,7 +39,7 @@
 <script setup>
 import { required, email, helpers, minLength } from "@vuelidate/validators";
 import { useVuelidate } from "@vuelidate/core";
-import { useWindowSize } from "@vueuse/core";
+import { useWindowSize, useDebounceFn } from "@vueuse/core";
 
 const { width } = useWindowSize();
 
@@ -69,16 +71,35 @@ const submitForm = async () => {
   const isFormCorrect = await v$.value.$validate();
   if (isFormCorrect) {
     emit("submit-form");
+    v$.value.$reset();
   }
 };
 
+const rerenderKey = ref(0);
+const rerenderAnimationComponent = useDebounceFn(() => {
+  rerenderKey.value++;
+}, 500);
+
 onMounted(() => {
   isClient.value = true;
+
+  // restart animation to prevent breaking it on screen rescaling
+  window.addEventListener("resize", rerenderAnimationComponent);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("resize", rerenderAnimationComponent);
 });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .apply-button {
   @apply py-3 px-6 bg-gradient-to-r from-blue-700 to-sky-500 rounded-xl text-white font-bold;
+  transition: transform 0.3s ease, background 1s ease; /* Плавный переход для увеличения и изменения градиента */
+  transform: scale(1); /* Начальный размер кнопки */
+
+  &:hover {
+    transform: scale(1.05); /* Увеличение размера кнопки при наведении */
+  }
 }
 </style>
