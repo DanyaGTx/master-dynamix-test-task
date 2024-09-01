@@ -12,6 +12,10 @@
 <script setup lang="ts">
 import { useWindowSize, useDebounceFn } from "@vueuse/core";
 
+useHead({
+  title: "Test Form",
+});
+
 const { $toast } = useNuxtApp();
 const { width } = useWindowSize();
 
