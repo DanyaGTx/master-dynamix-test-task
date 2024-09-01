@@ -89,7 +89,7 @@ export const useAnimateCirclesSequentially = () => {
   timeline
     .add(() => useAnimateSvgCircle(".first-circle"))
     .add(() => useAnimateSvgCircle(".second-circle"), "+=0.5")
-    .add(() => useAnimateSvgCircle(".third-circle"), "+=0.5")
+    .add(() => useAnimateSvgCircle(".third-circle"), "+=0.5");
 };
 
 export const useAnimateRotation = (chip, image, speed, circle) => {

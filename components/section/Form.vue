@@ -41,11 +41,11 @@ import { required, email, helpers, minLength } from "@vuelidate/validators";
 import { useVuelidate } from "@vuelidate/core";
 import { useWindowSize, useDebounceFn } from "@vueuse/core";
 
+const emit = defineEmits(["submit-form"]);
+
 const { width } = useWindowSize();
 
 const isClient = ref(false);
-
-const emit = defineEmits(["submit-form"]);
 
 const formModel = defineModel();
 
@@ -95,11 +95,12 @@ onUnmounted(() => {
 <style scoped lang="scss">
 .apply-button {
   @apply py-3 px-6 bg-gradient-to-r from-blue-700 to-sky-500 rounded-xl text-white font-bold;
-  transition: transform 0.3s ease, background 1s ease; /* Плавный переход для увеличения и изменения градиента */
-  transform: scale(1); /* Начальный размер кнопки */
+
+  transition: transform 0.3s ease, background 1s ease;
+  transform: scale(1);
 
   &:hover {
-    transform: scale(1.05); /* Увеличение размера кнопки при наведении */
+    transform: scale(1.05);
   }
 }
 </style>

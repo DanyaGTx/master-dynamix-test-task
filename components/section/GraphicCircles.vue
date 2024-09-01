@@ -6,7 +6,7 @@
           <img
             ref="chipImageD"
             class="chipD__image"
-            src="~/assets/images/chipD.png"
+            src="~/assets/images/chip_d.png"
             alt="chipD"
           />
         </div>
@@ -14,7 +14,7 @@
           <img
             ref="chipImageF"
             class="chipF__image"
-            src="~/assets/images/chipF.png"
+            src="~/assets/images/chip_f.png"
             alt="chipF"
           />
         </div>
@@ -24,7 +24,7 @@
           <img
             ref="chipImageN"
             class="chipN__image"
-            src="~/assets/images/chipN.png"
+            src="~/assets/images/chip_n.png"
             alt="chipN"
           />
         </div>
@@ -34,7 +34,7 @@
           <img
             ref="chipImageI"
             class="chipI__image"
-            src="~/assets/images/chipI.png"
+            src="~/assets/images/chip_i.png"
             alt="chipI"
           />
         </div>

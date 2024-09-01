@@ -11,11 +11,10 @@
 
 <script setup lang="ts">
 import { useWindowSize, useDebounceFn } from "@vueuse/core";
-import { useToast, TYPE, POSITION } from "vue-toastification";
 
+const { $toast } = useNuxtApp();
 const { width } = useWindowSize();
 
-const toast = useToast();
 const isClient = ref(false);
 
 const formData = ref({
@@ -25,11 +24,11 @@ const formData = ref({
 
 const showSuccessFormToast = () => {
   const options = {
-    type: TYPE.SUCCESS,
-    position: POSITION.TOP_CENTER,
+    position: "top-center",
     timeout: 3000,
   };
-  toast(`Hello ${formData.value.name}!`, options);
+  // @ts-ignore
+  $toast.success(`Hello ${formData.value.name}`, options);
 };
 
 const resetFormData = () => {
