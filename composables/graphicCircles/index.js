@@ -118,7 +118,7 @@ export const useAnimateRotation = (chip, image, speed, circle) => {
 
 export const useAnimateZoomAndRotate = (selector, { shakingOnHover }) => {
   const { $gsap } = useNuxtApp();
-
+  
   const element = document.querySelector(selector);
 
   if (element) {
@@ -153,12 +153,22 @@ export const useAnimateZoomAndRotate = (selector, { shakingOnHover }) => {
         ease: "power1.inOut", // Smooth easing
         yoyo: true, // Move back and forth (including rotation)
         repeat: -1, // Repeat indefinitely
+        onComplete: () => {
+          // Reset the state when animation completes
+          $gsap.set(element, { clearProps: "all" });
+        }
       });
     };
 
     // Shake effect on hover
     if (shakingOnHover) {
       element.addEventListener("mouseenter", () => {
+        // Kill any existing animation before starting a new one
+        $gsap.killTweensOf(element);
+
+        // Reset element state
+        $gsap.set(element, { clearProps: "all" });
+
         $gsap.to(element, {
           x: "+=5", // Shake 5px left and right
           duration: 0.1, // Quick shake duration
